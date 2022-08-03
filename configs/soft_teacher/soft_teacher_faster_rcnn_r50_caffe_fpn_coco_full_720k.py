@@ -4,25 +4,24 @@ data = dict(
     samples_per_gpu=8,
     workers_per_gpu=8,
     train=dict(
-
         sup=dict(
-
-            ann_file="data/coco/annotations/instances_train2017.json",
-            img_prefix="data/coco/train2017/",
-
+            ann_file="/home/ubuntu/project/data/COCO/annotations/instances_train2017.json",
+            img_prefix="/home/ubuntu/project/data/COCO/train2017/",
         ),
         unsup=dict(
-
             ann_file="data/coco/annotations/instances_unlabeled2017.json",
-            img_prefix="data/coco/unlabeled2017/",
-
+            img_prefix="/home/ubuntu/project/data/LGS/images/imgs_256_04_27",
         ),
+    ),
+    val=dict(
+        ann_file="/home/ubuntu/project/data/COCO/annotations/instances_val2017.json",
+        img_prefix="/home/ubuntu/project/data/COCO/val2017/",
     ),
     sampler=dict(
         train=dict(
             sample_ratio=[1, 1],
         )
-    ),
+    )
 )
 
 semi_wrapper = dict(
