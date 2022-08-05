@@ -138,7 +138,7 @@ bash tools/dist_train.sh <CONFIG_FILE_PATH> <NUM_GPUS>
 ```
 For example, to train ours `R50` model with 8 GPUs:
 ```shell script
-bash tools/dist_train.sh configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
+bash tools/dist_train.sh /home/ubuntu/project/Detection/SoftTeacher/configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
 ```
 - To train model on **new dataset**:
 
