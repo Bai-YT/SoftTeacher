@@ -152,12 +152,14 @@ The core idea is to convert a new dataset to coco format. Details about it can b
 ### Evaluation
 Fully-supervised:
 ```
-bash tools/dist_test.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k.py /home/ubuntu/project/Detection/SoftTeacher/work_dirs/faster_rcnn_r50_caffe_fpn_coco_full_720k/iter_108000.pth 8 --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=0.90
+bash tools/dist_test.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k.py /home/ubuntu/project/Detection/SoftTeacher/work_dirs/faster_rcnn_r50_caffe_fpn_coco_full_720k/iter_112000.pth 4 --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=0.90
 ```
+
 Semi-supervised:
 ```
-bash tools/dist_test.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k.py /home/ubuntu/project/Detection/SoftTeacher/work_dirs/faster_rcnn_r50_caffe_fpn_coco_full_720k/iter_108000.pth 8 --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=0.90
+bash tools/dist_test.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k.py /home/ubuntu/project/Detection/SoftTeacher/work_dirs/faster_rcnn_r50_caffe_fpn_coco_full_720k/iter_108000.pth 4 --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=0.90
 ```
+
 ### Inference
   To inference with trained model and visualize the detection results:
 

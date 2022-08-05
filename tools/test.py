@@ -116,6 +116,10 @@ def parse_args():
 
 def main():
     args = parse_args()
+    max_threads = int(os.cpu_count() // torch.cuda.device_count())  # 8 for P3, 24 for G5
+    print(f"Allowing a maximum of {max_threads} CPU workers per GPU.")
+    os.environ["OMP_NUM_THREADS"] = str(max_threads)
+    torch.set_num_threads(max_threads)
 
     assert args.out or args.eval or args.format_only or args.show or args.show_dir, (
         "Please specify at least one operation (save/eval/format/show the "
