@@ -137,6 +137,7 @@ Fully-supervised:
 ```
 bash tools/dist_train.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
 ```
+
 Semi-supervised:
 ```
 bash tools/dist_train.sh /home/ubuntu/project/Detection/SoftTeacher/configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
