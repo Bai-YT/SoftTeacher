@@ -9,6 +9,8 @@ from ssod.utils import log_image_with_boxes, log_every_n
 from .multi_stream_detector import MultiSteamDetector
 from .utils import Transform2D, filter_invalid
 
+DISABLE_UNSUP_CLS_LOSS = True
+
 
 @DETECTORS.register_module()
 class SoftTeacher(MultiSteamDetector):
@@ -193,6 +195,11 @@ class SoftTeacher(MultiSteamDetector):
         student_info=None,
         **kwargs,
     ):
+        if DISABLE_UNSUP_CLS_LOSS:  # only use regression loss for unannotated images
+            return {'loss_cls': torch.tensor(0.).cuda().requires_grad_(True),
+                    'acc': torch.tensor([100.]).cuda(),
+                    'loss_bbox': torch.tensor(0.).cuda().requires_grad_(True)}
+
         gt_bboxes, gt_labels, _ = multi_apply(
             filter_invalid,
             [bbox[:, :4] for bbox in pseudo_bboxes],
@@ -235,7 +242,7 @@ class SoftTeacher(MultiSteamDetector):
             bbox_targets[1][neg_inds] = bg_score[neg_inds].detach()
         loss = self.student.roi_head.bbox_head.loss(
             bbox_results["cls_score"],
-            bbox_results["bbox_pred"],
+            bbox_results["b[box_pred"],
             rois,
             *bbox_targets,
             reduction_override="none",
@@ -255,6 +262,7 @@ class SoftTeacher(MultiSteamDetector):
                 interval=500,
                 img_norm_cfg=student_info["img_metas"][0]["img_norm_cfg"],
             )
+        print("Unsup_cls_loss", loss)
         return loss
 
     def unsup_rcnn_reg_loss(

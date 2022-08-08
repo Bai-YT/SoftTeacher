@@ -133,13 +133,16 @@ done
 
 - To train model on the **full labeled data** setting:
 
-```shell script
-bash tools/dist_train.sh <CONFIG_FILE_PATH> <NUM_GPUS>
+Fully-supervised:
 ```
-For example, to train ours `R50` model with 8 GPUs:
-```shell script
+bash tools/dist_train.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
+```
+
+Semi-supervised:
+```
 bash tools/dist_train.sh /home/ubuntu/project/Detection/SoftTeacher/configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
 ```
+
 - To train model on **new dataset**:
 
 The core idea is to convert a new dataset to coco format. Details about it can be found in the [adding new dataset](https://github.com/open-mmlab/mmdetection/blob/master/docs/tutorials/customize_dataset.md).
@@ -147,9 +150,16 @@ The core idea is to convert a new dataset to coco format. Details about it can b
 
 
 ### Evaluation
+Fully-supervised:
 ```
-bash tools/dist_test.sh <CONFIG_FILE_PATH> <CHECKPOINT_PATH> <NUM_GPUS> --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=<THR>
+bash tools/dist_test.sh /home/ubuntu/project/Detection/SoftTeacher/configs/baseline/faster_rcnn_r50_caffe_fpn_coco_full_720k_eval.py /home/ubuntu/project/Detection/SoftTeacher/work_dirs/faster_rcnn_r50_caffe_fpn_coco_full_720k/iter_112000.pth 4 --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=0.90
 ```
+
+Semi-supervised:
+```
+bash tools/dist_test.sh /home/ubuntu/project/Detection/SoftTeacher/configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k_eval.py /home/ubuntu/project/Detection/SoftTeacher/work_dirs/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k/iter_40000.pth 4 --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=0.90
+```
+
 ### Inference
   To inference with trained model and visualize the detection results:
 
