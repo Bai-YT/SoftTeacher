@@ -15,6 +15,8 @@ data = dict(
             img_prefix="/home/ubuntu/project/data/COCO/train2017/",
         ),
         unsup=dict(
+            # ann_file="/home/ubuntu/project/data/COCO/annotations/instances_unlabeled2017.json",
+            # img_prefix="/home/ubuntu/project/data/COCO/unlabeled2017",
             ann_file="/home/ubuntu/project/data/LGS/COCO_format.json",
             img_prefix="/home/ubuntu/project/data/LGS/images/imgs_256_04_27",
         ),
